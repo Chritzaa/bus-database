@@ -64,7 +64,7 @@ def insert_data(conn):
     conn.commit()
 
 def timetable(conn):
-    print("------Scenario 1: Which bus went between 2 time frames------\n")
+    print("------Scenario 1: Which buses are active at x time------\n")
     t_start = input("Enter the time to see the active buses during that timeframe: ")
     # t_end = input("End in ")
     query = """SELECT kod_prag_dromologiou,x_coords,y_coords
