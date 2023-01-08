@@ -25,10 +25,12 @@ def create_table(conn):
     att = input("Enter the attributes in brackets ")
     curr.execute("CREATE TABLE "+table_name+" "+att)
     print("Table created")
+    conn.commit()
 
 def init_database(conn):
     with open('create.sql',encoding = 'utf8') as sql_file:
         curr.executescript(sql_file.read())
+    conn.commit()
 
 def delete_table(conn):
     table_to_del = input("Which table do you want to delete? ")
@@ -124,24 +126,24 @@ def main():
     init_database(conn)
     print("Available commands: Show Tables, Create Table, Delete Table, Insert Data,Show Data, Update Data, Write SQL, Scenario 1 to 5\n")
     commands = {
-        'Show Tables':show_tables,
-        'Create Table':create_table,
-        'Delete Table':delete_table,
-        'Insert Data':insert_data,
-        'Show Data':show_data,
-        'Update Data':update_data,
-        'Write SQL':write_sql_command,
-        'Scenario 1':timetable,
-        'Scenario 2':busnstop,
-        'Scenario 3':busnroute,
-        'Scenario 4':prevstops,
-        'Scenario 5':finddriver
+        'show tables':show_tables,
+        'create table':create_table,
+        'delete table':delete_table,
+        'insert data':insert_data,
+        'show data':show_data,
+        'update data':update_data,
+        'write sql':write_sql_command,
+        'scenario 1':timetable,
+        'scenario 2':busnstop,
+        'scenario 3':busnroute,
+        'scenario 4':prevstops,
+        'scenario 5':finddriver
     }
     while True:
         c = input("What do you want to do? \n")
-        if c=='EXIT':break
+        if c=='EXIT' or c=='exit':break
         else:
-            try: commands[c](conn)
+            try: commands[c.lower()](conn)
             except: print("Not a valid command")
     conn.close()
 
