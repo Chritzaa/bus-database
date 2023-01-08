@@ -1,5 +1,6 @@
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS "leoforio";
 CREATE TABLE IF NOT EXISTS "leoforio" (
 	"kod_leof"	int NOT NULL,
 	"typos_mixanis"	varchar(15) DEFAULT NULL,
@@ -12,6 +13,7 @@ CREATE TABLE IF NOT EXISTS "leoforio" (
 	PRIMARY KEY("kod_leof")
 );
 
+DROP TABLE IF EXISTS "odigos";
 CREATE TABLE IF NOT EXISTS "odigos" (
 	"AFM"	int NOT NULL,
 	"onoma"	varchar(50) NOT NULL,
@@ -24,6 +26,7 @@ CREATE TABLE IF NOT EXISTS "odigos" (
 	PRIMARY KEY("AFM")
 );
 
+DROP TABLE IF EXISTS "stasi";
 CREATE TABLE IF NOT EXISTS "stasi" (
 	"onoma_stasis"	varchar(50) NOT NULL,
 	"perioxh"	varchar(20),
@@ -32,6 +35,7 @@ CREATE TABLE IF NOT EXISTS "stasi" (
 	PRIMARY KEY("onoma_stasis")
 );
 
+DROP TABLE IF EXISTS "akoloythei";
 CREATE TABLE IF NOT EXISTS "akoloythei" (
 	"xronos_epomenis_stasis"	int,
 	"onoma_torinis_stasis"	varchar(50) NOT NULL,
@@ -41,6 +45,7 @@ CREATE TABLE IF NOT EXISTS "akoloythei" (
 	FOREIGN KEY("onoma_epomenis_stasis") REFERENCES "stasi"("onoma_stasis") ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS "dromologio";
 CREATE TABLE IF NOT EXISTS "dromologio" (
 	"grammi"	varchar(1) NOT NULL,
 	"kodikos_dromologiou"	varchar(3) NOT NULL,
@@ -49,6 +54,7 @@ CREATE TABLE IF NOT EXISTS "dromologio" (
 	FOREIGN KEY("leoforio_ektelesis") REFERENCES "leoforio"("kod_leof") ON UPDATE CASCADE ON DELETE SET NULL
 );
 
+DROP TABLE IF EXISTS "pragmatiko_dromologio";
 CREATE TABLE IF NOT EXISTS "pragmatiko_dromologio" (
 	"kod_prag_dromologiou"	varchar(3) NOT NULL,
 	"pragm_xronos_enarksis"	datetime,
@@ -59,6 +65,7 @@ CREATE TABLE IF NOT EXISTS "pragmatiko_dromologio" (
 	FOREIGN KEY("kod_prag_dromologiou") REFERENCES "dromologio"("kodikos_dromologiou") ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS "programmatismeno_dromologio";
 CREATE TABLE IF NOT EXISTS "programmatismeno_dromologio" (
 	"kod_prog_dromologiou"	varchar(3) NOT NULL,
 	"xronos_enarksis"	datetime NOT NULL,
@@ -67,6 +74,7 @@ CREATE TABLE IF NOT EXISTS "programmatismeno_dromologio" (
 	FOREIGN KEY("kod_prog_dromologiou") REFERENCES "dromologio"("kodikos_dromologiou") ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS "apoteleitai";
 CREATE TABLE IF NOT EXISTS "apoteleitai" (
 	"kod_dromologiou"	varchar(3) NOT NULL,
 	"onoma_stasis"	varchar(50) NOT NULL,
@@ -75,6 +83,7 @@ CREATE TABLE IF NOT EXISTS "apoteleitai" (
 	PRIMARY KEY("kod_dromologiou","onoma_stasis")
 );
 
+DROP TABLE IF EXISTS "anamenetai";
 CREATE TABLE IF NOT EXISTS "anamenetai" (
 	"programmatismenh_wra"	datetime NOT NULL,
 	"kod_leof"	int NOT NULL,
@@ -85,6 +94,7 @@ CREATE TABLE IF NOT EXISTS "anamenetai" (
 	PRIMARY KEY("kod_leof","onoma_stasis","programmatismenh_wra")
 );
 
+DROP TABLE IF EXISTS "stamataei";
 CREATE TABLE IF NOT EXISTS "stamataei" (
 	"kod_leof"	int NOT NULL,
 	"onoma_stasis"	varchar(50) NOT NULL,
